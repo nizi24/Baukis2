@@ -1,0 +1,27 @@
+- @title = "メッセージ詳細"
+%h1= @title
+
+.table-wrapper
+  - if @message.kind_of?(CustomerMessage)
+  %table.attributes
+    - p = MessagePresenter.new(@message, self)
+    %tr
+      %th 種類
+      %td= p.type
+    %tr
+      %th 送信者
+      %td= p.sender
+    %tr
+      %th 受信者
+      %td= p.receiver
+    %tr
+      %th 件名
+      %td= p.subject
+    %tr
+      %th 作成日時
+      %td.date= p.created_at
+
+  .tree
+    = p.tree
+  .body
+    = p.formatted_body
