@@ -22,4 +22,8 @@ private
       @exception = e
       render "errors/forbidden", status: 403
     end
+
+    def reject_non_xhr
+      raise ActionController::BadRequest unless request.xhr?
+    end
 end
