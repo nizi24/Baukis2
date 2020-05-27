@@ -5,6 +5,8 @@
   .links
     = link_to "新規登録", :new_admin_staff_member
 
+  = paginate @staff_members
+
   %table.listing
     %tr
       %th 氏名
@@ -25,8 +27,11 @@
         %td.boolean= m.suspended? ? raw("&#x2611") : raw("&#x2610")
         %td.actions
           = link_to "編集", [ :edit, :admin, m ]
+          = link_to "Events", [ :admin, m, :staff_events ]
           = link_to "削除", [ :admin, m ], method: :delete,
                             data: { confirm: "本当に削除しますか?" }
 
+  = paginate @staff_members
+  
   .links
     = link_to "新規登録", :new_admin_staff_member

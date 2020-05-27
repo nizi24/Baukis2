@@ -8,7 +8,7 @@ div#wrapper {
       margin: $wide * 2 auto;
       padding: $wide * 2;
       border-radius: $wide;
-      border: solid 4px $dark_magenta;
+      border: solid 4px $dark_cyan;
       background-color: $very_light_gray;
 
       form {
@@ -39,12 +39,6 @@ div#wrapper {
           input[type="submit"] {
             padding: $wide $wide * 2;
           }
-        }
-        div.field_with_errors {
-          display: inline;
-          padding: 0;
-          label { color: $red; }
-          input { background-color: $pink; }
         }
       }
     }

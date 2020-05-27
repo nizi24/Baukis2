@@ -1,4 +1,5 @@
 class Admin::SessionsController < Admin::Base
+  skip_before_action :authorize
 
   def new
     if current_administrator
@@ -19,6 +20,7 @@ class Admin::SessionsController < Admin::Base
         flash.now.alert = "アカウントが停止されています。"
       else
         session[:admin_id] = admin.id
+        session[:last_access_time] = Time.current
         flash.notice = "ログインしました。"
         redirect_to :admin_root
       end
