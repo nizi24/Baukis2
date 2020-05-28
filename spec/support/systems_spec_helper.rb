@@ -13,4 +13,13 @@ module SystemsSpecHelper
       click_button "ログイン"
     end
   end
+
+  def login_as_customer(customer, password = "pw")
+    visit customer_login_path
+    within("#login-form") do
+      fill_in "メールアドレス", with: customer.email
+      fill_in "パスワード", with: password
+      click_button "ログイン"
+    end
+  end
 end
