@@ -18,7 +18,8 @@
       %th 種別
       %th 日時
 
-    = render partial: "event", collection: @events
+    - @events.each do |event|
+      = StaffEventPresenter.new(event, self).table_row
 
     - if @events.empty?
       %tr

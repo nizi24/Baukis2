@@ -1,34 +1,10 @@
-.notes
-  %span.mark *
-  印の付いた項目は入力必須です。
-
-%div
-  = f.label :email, "メールアドレス", class: "required"
-  = f.email_field :email, size: 32, required: true
-
-- if f.object.new_record?
-  %div
-    = f.label :password, "パスワード", class: "required"
-    = f.password_field :password, size: 32, required: true
-
-%div
-  = f.label :family_name, "氏名", class: "required"
-  = f.text_field :family_name, required: true
-  = f.text_field :given_name, required: true
-
-%div
-  = f.label :family_name_kana, "フリガナ", class: "required"
-  = f.text_field :family_name_kana, required: true
-  = f.text_field :given_name_kana, required: true
-
-%div
-  = f.label :start_date, "入社日", class: "required"
-  = f.date_field :start_date, required: true
-
-%div
-  = f.label :end_date, "退社日"
-  = f.date_field :end_date
-
-%div.check-boxes
-  = f.check_box :suspended
-  = f.label :suspended, "アカウント停止"
+- p = StaffMemberFormPresenter.new(f, self)
+= p.notes
+- p.with_options(required: true) do |q|
+  = q.text_field_block(:email, "メールアドレス", size: 32)
+  = q.password_field_block(:password, "パスワード", size: 32)
+  = q.full_name_block(:family_name, :given_name,"氏名")
+  = q.full_name_block(:family_name_kana, :given_name_kana, "フリガナ")
+  = q.date_field_block(:start_date, "入社日")
+  = q.date_field_block(:end_date, "退社日", required: false)
+= p.suspended_check_box

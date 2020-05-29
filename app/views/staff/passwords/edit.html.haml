@@ -1,0 +1,15 @@
+- @title = "パスワード変更"
+%h1=@title
+
+#generic-form
+  = form_with model: @change_password_form, url: :staff_password, method: :patch do |f|
+
+    - p = FormPresenter.new(f, self)
+    - p.with_options(required: true, size: 32) do |q|
+      = q.password_field_block :current_password, "現在のパスワード"
+      = q.password_field_block :new_password, "新しいパスワード"
+      = q.password_field_block :new_password_confirmation, "新しいパスワード(確認)"
+
+    .buttons
+      = f.submit "変更"
+      = link_to "キャンセル", :staff_account

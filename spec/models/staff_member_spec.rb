@@ -65,5 +65,20 @@ RSpec.describe StaffMember, type: :model do
       member2 = build(:staff_member, email: member1.email)
       expect(member2).to_not be_valid
     end
+
+    example "ひらがな・漢字・カタカナ・アルファベットを含むfamily_nameは有効" do
+      member = build(:staff_member, family_name: "あア亜a")
+      expect(member).to be_valid
+    end
+
+    example "数字を含むfamily_nameは無効" do
+      member = build(:staff_member, family_name: "123")
+      expect(member).to_not be_valid
+    end
+
+    example "記号を含むgiven_nameは無効" do
+      member = build(:staff_member, given_name: "#$%")
+      expect(member).to_not be_valid
+    end
   end
 end
