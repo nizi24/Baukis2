@@ -54,12 +54,12 @@ class FormPresenter
   def drop_down_list(name, label_text, choices, options = {})
     markup(:div, class: "input-block") do |m|
       m << decorated_label(name, label_text, options)
-      m << form_builder.select(name, choices, { include_block: true }, options )
+      m << form_builder.select(name, choices, { include_blank: true }, options )
       m << error_messages_for(name)
     end
   end
 
-  private def decorated_label(name, label_text, options = {})
+  def decorated_label(name, label_text, options = {})
     label(name, label_text, class: options[:required] ? "required" : nil)
   end
 end
