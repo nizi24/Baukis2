@@ -3,11 +3,12 @@ class Customer < ApplicationRecord
   include EmailHolder
   include PasswordHolder
 
-  with_options(dependent: :destroy, autosave: true) do |r|
+  with_options(autosave: true) do |r|
     r.has_one :home_address
     r.has_one :work_address
   end
 
+  has_many :addresses, dependent: :destroy
   has_many :phones, dependent: :destroy
   has_many :personal_phones, -> { where(address_id: nil).order(:id) },
     class_name: "Phone", autosave: true
@@ -18,4 +19,12 @@ class Customer < ApplicationRecord
     before: ->(obj) { Date.today },
     allow_blank: true
   }
+
+  before_save do
+    if birthday
+      self.birth_year = birthday.year
+      self.birth_month = birthday.month
+      self.birth_mday = birthday.mday
+    end
+  end
 end
