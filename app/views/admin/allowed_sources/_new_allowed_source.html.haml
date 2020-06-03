@@ -1,0 +1,9 @@
+= form_with model: @new_allowed_source, url: [ :admin, @new_allowed_source ] do |f|
+  %div
+    = f.label :octet1, "新規許可IPアドレス"
+    - f.with_options(size: 3) do |ff|
+      = ff.text_field :octet1
+      = ff.text_field :octet2
+      = ff.text_field :octet3
+      = ff.text_field :last_octet
+    = f.submit "追加"
