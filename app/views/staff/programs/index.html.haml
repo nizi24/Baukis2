@@ -1,0 +1,26 @@
+- @title = "プログラム管理"
+%h1= @title
+
+.table-wrapper
+  .links
+    = link_to "新規登録", :new_staff_program
+
+    = paginate @programs
+
+    %table.listing
+      %tr
+        %th タイトル
+        %th 申し込み開始日時
+        %th 申し込み終了日時
+        %th 最小参加者数
+        %th 最大参加者数
+        %th 申し込み件数
+        %th 参加職員
+        %th アクション
+
+      = render partial: "program", collection: @programs
+
+    = paginate @programs
+
+    .links
+      = link_to "新規登録", :new_staff_program
