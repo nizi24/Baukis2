@@ -1,0 +1,9 @@
+- @title = "プログラムの編集"
+%h1= @title
+
+#generic-form
+  = form_with model: @program, url: [ :staff, @program ] do |f|
+    = render "form", f: f
+    .buttons
+      = f.submit "更新"
+      = link_to "キャンセル", :staff_programs

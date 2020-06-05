@@ -1,0 +1,16 @@
+- p = ProgramFormPresenter.new(f, self)
+= p.text_field_block(:title, "タイトル", maxlength: 32, require: true)
+
+- p.with_options(require: true) do |q|
+  = p.datetime_field_block(:application_start, "申し込み開始日時",
+    instruction: "現在から1年後まで")
+  = p.datetime_field_block(:application_end, "申し込み終了日時",
+    instruction: "開始日時から90日後まで")
+
+- p.with_options(size: 6) do |q|
+  = q.number_field_block(:min_number_of_participants, "最小参加者数",
+    max: 1000)
+  = q.number_field_block(:max_number_of_participants, "最大参加者数",
+    max: 1000)
+
+= p.description
