@@ -1,0 +1,18 @@
+- @title = "プログラム⼀覧"
+%h1= @title
+.table-wrapper
+
+  = paginate @programs
+
+  %table.listing
+    %tr
+      %th タイトル
+      %th 申し込み開始⽇時
+      %th 申し込み終了⽇時
+      %th 最⼩参加者数
+      %th 最⼤参加者数
+      %th アクション
+      
+    = render partial: "program", collection: @programs
+
+  = paginate @programs

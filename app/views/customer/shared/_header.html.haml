@@ -6,3 +6,5 @@
     = link_to "ログアウト", :customer_session, method: :delete
   - else
     = link_to "ログイン", :customer_login
+
+  = link_to "アカウント", :customer_account, if current_customer
