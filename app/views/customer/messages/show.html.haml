@@ -1,0 +1,20 @@
+- @title = "メッセージ詳細"
+%h1= @title
+
+.table-wrapper
+  = link_to "回答する", new_customer_message_reply_path(@message)
+
+  %table.attributes
+    - p = MessagePresenter.new(@message, self)
+    %tr
+      %th 送信者
+      %td= p.sender
+    %tr
+      %th 件名
+      %td= p.subject
+    %tr
+      %th 作成日時
+      %td.date= p.created_at
+
+  .body
+    = p.formatted_body

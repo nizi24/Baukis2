@@ -1,8 +1,18 @@
 class Customer::MessagesController < Customer::Base
 
+  def index
+    @messages = StaffMessage.customer_received(current_customer).sorted.not_deleted
+      .page(params[:page])
+  end
+
+  def show
+    @message = Message.find(params[:id])
+  end
+
   def new
     @message = CustomerMessage.new
   end
+
 
   # POST
   def confirm
@@ -30,6 +40,19 @@ class Customer::MessagesController < Customer::Base
     else
       render action: "new"
     end
+  end
+
+  def destroy
+    @message = Message.find(params[:id])
+    @message.update_column(:deleted, true)
+    flash.notice = "メッセージを削除しました。"
+    redirect_to :customer_messages
+  end
+
+  def deleted
+    @messages = StaffMessage.customer_received(current_customer).deleted
+      .sorted.page(params[:page])
+    render action: "index"
   end
 
   private def customer_message_params

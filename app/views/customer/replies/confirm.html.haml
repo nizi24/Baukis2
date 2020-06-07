@@ -1,0 +1,12 @@
+- @title = "問い合わせへの返信（確認）"
+%h1= @title
+
+#generic-form
+  = form_with model: @reply, url: customer_message_reply_path(@message) do |f|
+    = render "confirming_form", f: f
+    .buttons
+      = f.submit "送信"
+      = f.submit "訂正", name: "correct"
+      = link_to "キャンセル", :customer_messages
+
+  = render "message"

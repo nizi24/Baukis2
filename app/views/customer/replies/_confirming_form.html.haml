@@ -1,0 +1,4 @@
+- p = ConfirmingFormPresenter.new(f, self)
+%div 以下の内容で送信します。よろしいですか?
+= p.text_field_block(:subject, "件名")
+= p.text_area_block(:body, "本文")

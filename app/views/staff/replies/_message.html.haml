@@ -1,0 +1,14 @@
+- p = MessagePresenter.new(@message, self)
+.table-wrapper
+  %table.attributes
+    %tr
+      %th 送信者
+      %td= p.sender
+    %tr
+      %th 件名
+      %td= p.subject
+    %tr
+      %th 作成⽇時
+      %td.date= p.created_at
+
+.body= p.formatted_body

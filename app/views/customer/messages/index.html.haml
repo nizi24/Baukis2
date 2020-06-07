@@ -1,0 +1,28 @@
+- if params[:action] == "index"
+  - @title = "受信メッセージ一覧"
+- elsif params[:action] == "deleted"
+  - @title = "ゴミ箱"
+
+%h1= @title
+
+.table-wrapper
+  = paginate @messages
+
+  %table.listing
+    %tr
+      %th 送信者
+      %th 件名
+      %th 作成日時
+      %th アクション
+    - @messages.each do |m|
+      - p = MessagePresenter.new(m, self)
+      %tr
+        %td= p.sender
+        %td= p.truncated_subject
+        %td= p.created_at
+        %td.actions
+          = link_to "詳細", customer_message_path(m)
+          |
+          = link_to_if m.kind_of?(StaffMessage), "削除", customer_message_path(m), method: :delete,
+            data: { confirm: "本当に削除しますか?" }
+  = paginate @messages
